@@ -71,7 +71,7 @@
             antd
           </a>
           <a-divider type="vertical" />
-          <a href="https://hitokoto.cn/" target="_blank"> hitokoto </a>
+          <!-- <a href="https://hitokoto.cn/" target="_blank"> hitokoto </a> -->
           <a-divider type="vertical" />
           <a href="https://github.com/AJLoveChina/vue-keyboard" target="_blank">
             keyboard
@@ -97,6 +97,9 @@ import xiaoheKeyboard from "@/assets/keyboard-ansi.svg";
 import mircoSoftKeyboard from "@/assets/mircosoft-keyboard-ansi.svg";
 import naturalCodeKeyboard from "@/assets/naturalCode-keyboard.svg";
 import vueKeyboard from "./vue-keyboard";
+//by Sunlly
+import wordLocal from "../materials/word_1.json";
+//
 export default {
   components: {
     vueKeyboard: vueKeyboard,
@@ -165,17 +168,28 @@ export default {
   },
   methods: {
     getWord() {
-      this.$axios.get("https://v1.hitokoto.cn/").then((res) => {
-        this.word = res.data.hitokoto;
+      // this.$axios.get("https://v1.hitokoto.cn/").then((res) => {
+      //   this.word = res.data.hitokoto;
+      //   // this.word = "只吃师";
+      //   this.wordFrom = res.data.from;
+      //   this.wordCreator = res.data.creator;
+      //   this.wordIndex = 0;
+      //   if (!this.isChinese(this.word[0])) {
+      //     this.commit();
+      //   }
+      //   this.initHand();
+      // });
+        var word_number=Math.floor(Math.random()*2)+1;
+        var word=wordLocal[word_number.toString()]
+        this.word = word.hitokoto;
         // this.word = "只吃师";
-        this.wordFrom = res.data.from;
-        this.wordCreator = res.data.creator;
+        this.wordFrom = " ";
+        this.wordCreator = " ";
         this.wordIndex = 0;
         if (!this.isChinese(this.word[0])) {
           this.commit();
         }
         this.initHand();
-      });
     },
     commit() {
       if (this.wordIndex < this.word.length - 1) {
